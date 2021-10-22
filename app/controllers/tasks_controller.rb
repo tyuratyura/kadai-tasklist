@@ -18,11 +18,11 @@ class TasksController < ApplicationController
       if @task.save
           flash[:success]="タスクは正常に処理されました"
           redirect_to @task
-    else
+      else
         flash[:danger]="タスクは処理されませんでした"
         render:new
-    end
-end
+      end
+  end
 
   def edit
   end
@@ -32,10 +32,10 @@ end
       if @task.update(task_params)
           flash[:success]="タスクは正常に更新されました"
           redirect_to @task
-    else
+      else
         flash[:danger]="タスクは更新されませんでした"
         render:new
-  end
+      end
   end
 
 def destroy
