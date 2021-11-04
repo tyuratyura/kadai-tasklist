@@ -1,9 +1,12 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  before_action :require_user_logged_in, 
+  before_action :require_user_logged_in
 
   def index
+    if logged_in?
+     @task = current_user.tasks.build
      @pagy, @tasks = pagy(Task.order(id: :desc), items:3)
+    end
   end
 
   def show
@@ -18,7 +21,7 @@ class TasksController < ApplicationController
       
       if @task.save
           flash[:success]="投稿は正常に処理されました"
-          redirect_to @task
+          redirect_to root_url
       else
         flash[:danger]="投稿は処理されませんでした"
         render:new
