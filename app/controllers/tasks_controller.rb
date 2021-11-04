@@ -3,10 +3,8 @@ class TasksController < ApplicationController
   before_action :require_user_logged_in
 
   def index
-    if logged_in?
-     @task = current_user.tasks.build
-     @pagy, @tasks = pagy(Task.order(id: :desc), items:3)
-    end
+   @tasks = current_user.tasks
+   @pagy, @tasks = pagy(@tasks, items:3)
   end
 
   def show
